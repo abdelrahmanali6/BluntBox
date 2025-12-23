@@ -1,0 +1,188 @@
+<div class="d-flex min-vh-100 bg-background overflow-hidden position-relative">
+    <!-- Global background elements -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dot-pattern pointer-events-none" style="z-index: 0;">
+    </div>
+    <div class="ambient-blob accent" style="top: 50%; left: -100px; opacity: 0.05;"></div>
+
+    <!-- Left side - Form -->
+    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-4 p-lg-5 fade-in z-1">
+        <div class="w-100" style="max-width: 28rem;">
+            <!-- Logo -->
+            <a routerLink="/" class="d-flex align-items-center gap-2 mb-5 text-decoration-none">
+                <app-blunt-box-logo [size]="36" className="text-primary"></app-blunt-box-logo>
+                <span class="fs-4 fw-bold text-foreground">BluntBox</span>
+            </a>
+
+            <!-- Header -->
+            <h1 class="display-6 fw-bold text-foreground mb-2">
+                {{ (mode === 'register' ? 'AUTH.HEADER_REGISTER' : 'AUTH.HEADER_LOGIN') | translate }}
+            </h1>
+            <p class="text-text-soft mb-4 mb-lg-5">
+                {{ (mode === 'register' ? 'AUTH.SUBTITLE_REGISTER' : 'AUTH.SUBTITLE_LOGIN') | translate }}
+            </p>
+
+            <!-- Error Alert -->
+            <!-- Error Alert -->
+            <div *ngIf="error()" class="alert d-flex align-items-center mb-4 fade-in rounded-4 border-0 error-glass"
+                role="alert">
+                <lucide-icon [name]="icons.AlertCircle" [size]="20" class="me-2 flex-shrink-0"></lucide-icon>
+                <div class="small fw-medium">{{ error() }}</div>
+            </div>
+
+            <!-- Form -->
+            <form [formGroup]="currentForm" (ngSubmit)="handleSubmit()" class="d-flex flex-column gap-3">
+                <!-- Username (Register only) -->
+                <div *ngIf="mode === 'register'">
+                    <label class="form-label small fw-bold text-foreground mb-2 text-uppercase ls-1">{{
+                        'AUTH.USERNAME_LABEL' | translate }}</label>
+                    <div class="position-relative mb-1">
+                        <lucide-icon [name]="icons.User"
+                            class="position-absolute start-0 top-50 translate-middle-y ms-3 text-text-whisper"
+                            [size]="20"></lucide-icon>
+                        <input type="text" formControlName="username"
+                            [placeholder]="'AUTH.USERNAME_PLACEHOLDER' | translate"
+                            class="notebook-input w-100 auth-input p-3 ps-5 border-border-soft rounded-4"
+                            [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+                    </div>
+                    <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+                        class="text-danger small ms-2">
+                        {{ 'AUTH.REQUIRED_FIELD' | translate }}
+                    </div>
+
+                    <label class="form-label small fw-bold text-foreground mb-2 mt-3 text-uppercase ls-1">{{
+                        'AUTH.DISPLAY_NAME_LABEL' | translate }}</label>
+                    <div class="position-relative">
+                        <lucide-icon [name]="icons.User"
+                            class="position-absolute start-0 top-50 translate-middle-y ms-3 text-text-whisper"
+                            [size]="20"></lucide-icon>
+                        <input type="text" formControlName="displayName"
+                            [placeholder]="'AUTH.DISPLAY_NAME_PLACEHOLDER' | translate"
+                            class="notebook-input w-100 auth-input p-3 ps-5 border-border-soft rounded-4">
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="form-label small fw-bold text-foreground mb-2 text-uppercase ls-1">{{
+                        'AUTH.EMAIL_LABEL' | translate }}</label>
+                    <div class="position-relative mb-1">
+                        <lucide-icon [name]="icons.Mail"
+                            class="position-absolute start-0 top-50 translate-middle-y ms-3 text-text-whisper"
+                            [size]="20"></lucide-icon>
+                        <input type="email" formControlName="email" [placeholder]="'AUTH.EMAIL_PLACEHOLDER' | translate"
+                            class="notebook-input w-100 auth-input p-3 ps-5 border-border-soft rounded-4"
+                            [class.is-invalid]="currentForm.get('email')?.invalid && currentForm.get('email')?.touched">
+                    </div>
+                    <div *ngIf="currentForm.get('email')?.invalid && currentForm.get('email')?.touched"
+                        class="text-danger small ms-2">
+                        <span *ngIf="currentForm.get('email')?.errors?.['required']">{{ 'AUTH.REQUIRED_FIELD' |
+                            translate }}</span>
+                        <span *ngIf="currentForm.get('email')?.errors?.['email']">{{ 'AUTH.INVALID_EMAIL' | translate
+                            }}</span>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="form-label small fw-bold text-foreground mb-2 text-uppercase ls-1">{{
+                        'AUTH.PASSWORD_LABEL' | translate }}</label>
+                    <div class="position-relative mb-1">
+                        <lucide-icon [name]="icons.Lock"
+                            class="position-absolute start-0 top-50 translate-middle-y ms-3 text-text-whisper"
+                            [size]="20"></lucide-icon>
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                            [placeholder]="'AUTH.PASSWORD_PLACEHOLDER' | translate"
+                            class="notebook-input w-100 auth-input with-eye p-3 ps-5 border-border-soft rounded-4"
+                            [class.is-invalid]="currentForm.get('password')?.invalid && currentForm.get('password')?.touched">
+                        <button type="button" (click)="togglePassword()"
+                            class="btn btn-link position-absolute end-0 top-50 translate-middle-y me-2 text-text-whisper p-0 border-0"
+                            style="width: 24px; height: 24px;">
+                            <lucide-icon [name]="showPassword ? icons.EyeOff : icons.Eye" [size]="20"></lucide-icon>
+                        </button>
+                    </div>
+                    <div *ngIf="currentForm.get('password')?.invalid && currentForm.get('password')?.touched"
+                        class="text-danger small ms-2">
+                        <span *ngIf="currentForm.get('password')?.errors?.['required']">{{ 'AUTH.REQUIRED_FIELD' |
+                            translate }}</span>
+                        <span *ngIf="currentForm.get('password')?.errors?.['minlength']">{{ 'AUTH.PASSWORD_TOO_SHORT' |
+                            translate }}</span>
+                    </div>
+                </div>
+
+                <!-- Confirm Password (Register only) -->
+                <div *ngIf="mode === 'register'">
+                    <label class="form-label small fw-bold text-foreground mb-2 text-uppercase ls-1">{{
+                        'AUTH.CONFIRM_PASSWORD_LABEL' | translate }}</label>
+                    <div class="position-relative mb-1">
+                        <lucide-icon [name]="icons.Lock"
+                            class="position-absolute start-0 top-50 translate-middle-y ms-3 text-text-whisper"
+                            [size]="20"></lucide-icon>
+                        <input type="password" formControlName="confirmPassword"
+                            [placeholder]="'AUTH.CONFIRM_PASSWORD_PLACEHOLDER' | translate"
+                            class="notebook-input w-100 auth-input p-3 ps-5 border-border-soft rounded-4"
+                            [class.is-invalid]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+                    </div>
+                    <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+                        class="text-danger small ms-2">
+                        <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">{{ 'AUTH.REQUIRED_FIELD'
+                            | translate }}</span>
+                        <span *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch']">{{
+                            'AUTH.PASSWORD_MISMATCH' | translate }}</span>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" [disabled]="currentForm.invalid || isLoading"
+                    class="btn btn-hero btn-lg w-100 mt-4 d-flex align-items-center justify-content-center gap-3 shadow-primary-glow rounded-pill py-3 fw-bold disabled:opacity-50">
+                    {{ (mode === 'register' ? 'AUTH.SUBMIT_REGISTER' : 'AUTH.SUBMIT_LOGIN') | translate }}
+                    <lucide-icon *ngIf="!isLoading" [name]="icons.ArrowRight" [size]="18"></lucide-icon>
+                    <lucide-icon *ngIf="isLoading" name="loader-2" [size]="18" class="animate-spin"></lucide-icon>
+                </button>
+            </form>
+
+            <!-- Privacy Note -->
+            <p *ngIf="mode === 'register'" class="text-text-whisper small text-center mt-4 mb-0 opacity-75">
+                <lucide-icon [name]="icons.Lock" [size]="12"
+                    class="me-1 mb-1 d-inline-block text-primary"></lucide-icon>
+                {{ 'AUTH.PRIVACY_NOTE' | translate }}
+            </p>
+
+            <!-- Switch Mode -->
+            <div class="mt-5 pt-4 border-top border-border-soft text-center opacity-90">
+                <p class="text-text-soft small mb-0">
+                    {{ (mode === 'register' ? 'AUTH.SWITCH_REGISTER_TEXT' : 'AUTH.SWITCH_LOGIN_TEXT') | translate }}
+                    <button (click)="toggleMode()"
+                        class="btn btn-link text-primary fw-bold p-0 text-decoration-none ms-1 align-baseline glass-hover px-3 py-1 rounded-pill small">
+                        {{ (mode === 'register' ? 'AUTH.SWITCH_REGISTER_BTN' : 'AUTH.SWITCH_LOGIN_BTN') | translate }}
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right side - Decorative -->
+    <div
+        class="d-none d-lg-flex col-lg-6 align-items-center justify-content-center bg-card position-relative overflow-hidden z-1 border-start border-border-soft">
+        <!-- Ambient shapes -->
+        <div class="position-absolute w-100 h-100 top-0 start-0 z-0">
+            <div class="ambient-blob primary"></div>
+            <div class="ambient-blob secondary"></div>
+        </div>
+
+        <div class="position-relative z-1 text-center px-5 d-flex flex-column align-items-center fade-in"
+            style="max-width: 480px; animation-delay: 0.2s;">
+            <div
+                class="logo-container glassmorphism rounded-5 p-4 mb-4 d-flex align-items-center justify-content-center shadow-lg border-border-soft">
+                <app-blunt-box-logo [size]="56" className="text-primary"></app-blunt-box-logo>
+            </div>
+            <h2 class="h1 fw-bold text-foreground mb-3" [innerHTML]="'AUTH.DECORATIVE_TITLE' | translate">
+            </h2>
+            <p class="text-text-soft lead fs-6 opacity-80">
+                {{ 'AUTH.DECORATIVE_SUBTITLE' | translate }}
+            </p>
+        </div>
+    </div>
+    <!-- Floating elements (simulated with CSS animation) -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+</div>

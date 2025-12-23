@@ -1,0 +1,62 @@
+.logo-container {
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+.auth-input {
+    height: 56px !important;
+    padding-left: 3.5rem !important;
+    font-size: 1rem !important;
+    border-radius: 12px !important;
+
+    &.with-eye {
+        padding-right: 3.5rem !important;
+    }
+}
+
+.share-link-text {
+    font-size: 0.825rem;
+    color: hsl(var(--text-whisper));
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.error-glass {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    backdrop-filter: blur(5px);
+}
+
+.shape-1 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    right: -150px;
+    background: radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%);
+    animation: float-slow-shape 20s infinite alternate;
+}
+
+.shape-2 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    bottom: -125px;
+    left: 20%;
+    background: radial-gradient(circle, hsl(var(--secondary) / 0.1) 0%, transparent 70%);
+    animation: float-slow-shape 25s infinite alternate-reverse;
+}
+
+@keyframes float-slow-shape {
+    0% {
+        transform: translate(0, 0) rotate(0);
+    }
+
+    100% {
+        transform: translate(50px, 30px) rotate(15deg);
+    }
+}

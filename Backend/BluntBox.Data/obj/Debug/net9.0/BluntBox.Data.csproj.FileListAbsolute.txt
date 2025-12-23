@@ -1,0 +1,17 @@
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/bin/Debug/net9.0/BluntBox.Data.deps.json
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/bin/Debug/net9.0/BluntBox.Data.runtimeconfig.json
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/bin/Debug/net9.0/BluntBox.Data.dll
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/bin/Debug/net9.0/BluntBox.Data.pdb
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/bin/Debug/net9.0/BluntBox.Core.dll
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/bin/Debug/net9.0/BluntBox.Core.pdb
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.csproj.AssemblyReference.cache
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.GeneratedMSBuildEditorConfig.editorconfig
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.AssemblyInfoInputs.cache
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.AssemblyInfo.cs
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.csproj.CoreCompileInputs.cache
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.7DED682A.Up2Date
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.dll
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/refint/BluntBox.Data.dll
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.pdb
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/BluntBox.Data.genruntimeconfig.cache
+/Users/abdelrahmanali/Downloads/BluntBox/BluntBox.Data/obj/Debug/net9.0/ref/BluntBox.Data.dll
