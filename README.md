@@ -10,6 +10,11 @@ BluntBox/
 ├─ Frontend/     # Angular project
 ```
 
+## Live Deployment
+
+Frontend (Angular – Netlify):  
+https://vermillion-queijadas-6eec4d.netlify.app/
+
 ## Installation
 
 ### Backend
